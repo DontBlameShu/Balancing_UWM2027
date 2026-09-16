@@ -1,0 +1,1 @@
+balancing_uwm2027\startup_stm32h723xx.o: startup_stm32h723xx.s
