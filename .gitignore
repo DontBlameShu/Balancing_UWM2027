@@ -1,0 +1,27 @@
+# Keil build output
+MDK-ARM/Balancing_UWM2027/
+MDK-ARM/Objects/
+MDK-ARM/Listings/
+
+# Keil user-specific files
+*.uvguix.*
+*.scvd
+
+# Build artifacts
+*.o
+*.d
+*.crf
+*.axf
+*.hex
+*.bin
+*.map
+*.lnp
+*.dep
+*.htm
+*.lst
+*.iex
+
+# Temporary files
+*.bak
+*.tmp
+*.orig
