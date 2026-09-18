@@ -10,7 +10,7 @@ extern FDCAN_HandleTypeDef hfdcan2;
 typedef struct
 {
     uint16_t ecd;
-    int16_t speed_rad_s;
+    fp32 speed_rad_s;
     int16_t given_current;
     uint8_t temperate;
     int16_t last_ecd;

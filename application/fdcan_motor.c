@@ -1,12 +1,12 @@
 #include  "fdcan_motor.h"
-#define get_LK8016_measure(ptr, data)                                   \
-    {                                                                   \
-        (ptr)->last_ecd = (ptr)->ecd;                                   \
-        (ptr)->ecd = (uint16_t)(((uint16_t)(data)[7] << 8) | (data)[6]);\
-        (ptr)->speed_rad_s = (int16_t)(((uint16_t)(data)[5] << 8) | (data)[4]); \
-        (ptr)->given_current = (int16_t)(((uint16_t)(data)[3] << 8) | (data)[2]); \
-        (ptr)->temperate = (int8_t)(data)[1];                            \
-    }
+#define get_LK8016_measure(ptr, data) \
+{ \
+    (ptr)->last_ecd = (ptr)->ecd; \
+    (ptr)->ecd = (uint16_t)(((uint16_t)(data)[7] << 8) | (data)[6]); \
+    (ptr)->speed_rad_s = (float)((int16_t)(((uint16_t)(data)[5] << 8) | (data)[4])) * 0.01745329252f; \
+    (ptr)->given_current = (int16_t)(((uint16_t)(data)[3] << 8) | (data)[2]); \
+    (ptr)->temperate = (int8_t)(data)[1]; \
+}
 
 void FDCAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t motor4, int16_t motor5, int16_t motor6)
 {

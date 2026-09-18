@@ -38,14 +38,46 @@
         * Output
         * EVENT_OUT
         * EXTI
+     PD2   ------> UART5_RX
 */
 void MX_GPIO_Init(void)
 {
 
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, ACCEL_CS_Pin|GYRO_CS_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pins : ACCEL_CS_Pin GYRO_CS_Pin */
+  GPIO_InitStruct.Pin = ACCEL_CS_Pin|GYRO_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : ACCEL_INT_Pin GYRO_INT_Pin */
+  GPIO_InitStruct.Pin = ACCEL_INT_Pin|GYRO_INT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PD2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF8_UART5;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*AnalogSwitch Config */
+  HAL_SYSCFG_AnalogSwitchConfig(SYSCFG_SWITCH_PC3, SYSCFG_SWITCH_PC3_CLOSE);
 
 }
 
